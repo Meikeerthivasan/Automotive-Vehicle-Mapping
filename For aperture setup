@@ -1,0 +1,13 @@
+ant_aperture = 6.06e-4; % in square meter
+ant_gain = aperture2gain(ant_aperture,lambda); % in dB
+tx_ppower = db2pow(5)*1e-3; % in watts
+tx_gain = 9+ant_gain; % in dB
+rx_gain = 15+ant_gain; % in dB
+rx_nf = 4.5; 
+% The receiver will have some noise factor that we are mentioning so 
+it could more like a real world simulation
+transmitter = 
+phased.Transmitter('PeakPower',tx_ppower,'Gain',tx_gain);
+receiver = 
+phased.ReceiverPreamp('Gain',rx_gain,'NoiseFigure',rx_nf,'SampleRate',
+fs);
